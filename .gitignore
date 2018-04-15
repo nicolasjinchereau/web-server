@@ -1,0 +1,8 @@
+/Debug/
+/Release/
+*.vcxproj.user
+*.VC.opendb
+*.VC.db
+.vs/
+/bin/*
+!/bin/httpdocs
