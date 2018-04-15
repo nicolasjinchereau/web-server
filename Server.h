@@ -34,11 +34,11 @@ class Server
 
     std::string defaultPage = "index.html";
     std::string httpdocs;
-	int port = 0;
-	bool run = false;
+    int port = 0;
+    bool run = false;
     Spinlock lock;
 
-	std::thread listenThread;
+    std::thread listenThread;
     Socket listenSocket;
 
     std::thread idleThread;
@@ -62,9 +62,9 @@ class Server
 
     static void Log(const Session* session, const std::string& message);
 public:
-	Server();
-	~Server();
-	
+    Server();
+    ~Server();
+    
     ///<summary>If 'threadCount' is zero, std::thread::hardware_concurrency() will be used.</summary>
     void Start(int port, const std::string& docsPath, size_t threadCount = 0);
 

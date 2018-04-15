@@ -151,7 +151,7 @@ void Socket::SetTcpNoDelay(bool value)
 void Socket::Bind(int port, const char* address, bool reuseAddress)
 {
     sockaddr_in addr{};
-	addr.sin_family = AF_INET;
+    addr.sin_family = AF_INET;
     addr.sin_port = htons(port);
 
     if(address != nullptr)
@@ -162,7 +162,7 @@ void Socket::Bind(int port, const char* address, bool reuseAddress)
     if(reuseAddress)
     {
         int yes = 1;
-	    if(setsockopt(_handle, SOL_SOCKET, SO_REUSEADDR, (char*)&yes, sizeof(int)) == SOCKET_ERROR)
+        if(setsockopt(_handle, SOL_SOCKET, SO_REUSEADDR, (char*)&yes, sizeof(int)) == SOCKET_ERROR)
             throw SocketException(WSAGetLastError(), "failed to set socket option: reuse address");
     }
     
@@ -179,11 +179,11 @@ void Socket::Listen()
 void Socket::Connect(int port, const char* address)
 {
     sockaddr_in addr;
-	addr.sin_family = AF_INET;
-	addr.sin_port = htons(port);
+    addr.sin_family = AF_INET;
+    addr.sin_port = htons(port);
     inet_pton(AF_INET, address, &addr.sin_addr);
 
-	if(connect(_handle, (sockaddr*)&addr, sizeof(sockaddr_in)) == SOCKET_ERROR)
+    if(connect(_handle, (sockaddr*)&addr, sizeof(sockaddr_in)) == SOCKET_ERROR)
         throw SocketException(WSAGetLastError(), "failed to connect");
 }
 
@@ -193,10 +193,10 @@ Socket Socket::Accept()
         throw SocketException(-1, "invalid socket");
     
     sockaddr_in addr{};
-	int len = sizeof(addr);
+    int len = sizeof(addr);
 
-	SOCKET ret = accept(_handle, (sockaddr*)&addr, &len);
-	if(ret == INVALID_SOCKET)
+    SOCKET ret = accept(_handle, (sockaddr*)&addr, &len);
+    if(ret == INVALID_SOCKET)
         throw SocketException(WSAGetLastError(), "failed to accept connection");
 
     return Socket((uintptr_t)ret);
@@ -237,7 +237,7 @@ int Socket::Send(const char *buffer, size_t length)
     if(_handle == INVALID_SOCKET)
         throw SocketException(-1, "invalid socket");
     
-	int ret = send(_handle, buffer, (int)length, 0);
+    int ret = send(_handle, buffer, (int)length, 0);
     if(ret == SOCKET_ERROR)
     {
         auto code = WSAGetLastError();
@@ -264,65 +264,65 @@ int Socket::Poll(SocketPollMode mode, milliseconds timeout)
 
     if(timeout.count() >= 0)
     {
-	    long long secs = duration_cast<seconds>(timeout).count();
+        long long secs = duration_cast<seconds>(timeout).count();
         long long usecs = duration_cast<microseconds>(timeout).count() - secs * micro::den;
-	    tv = { (long)secs, (long)usecs };
+        tv = { (long)secs, (long)usecs };
         pTimeout = &tv;
     }
 
     fd_set fdSet = { 1, _handle };
     int ret = -1;
 
-	switch(mode)
-	{
-	case SocketPollMode::Accept:
-	case SocketPollMode::Read:
-		ret = select(0, &fdSet, 0, 0, pTimeout);
-		break;
-	case SocketPollMode::Write:
-		ret = select(0, 0, &fdSet, 0, pTimeout);
-		break;
+    switch(mode)
+    {
+    case SocketPollMode::Accept:
+    case SocketPollMode::Read:
+        ret = select(0, &fdSet, 0, 0, pTimeout);
+        break;
+    case SocketPollMode::Write:
+        ret = select(0, 0, &fdSet, 0, pTimeout);
+        break;
     case SocketPollMode::Error:
-		ret = select(0, 0, 0, &fdSet, pTimeout);
-		break;
-	}
+        ret = select(0, 0, 0, &fdSet, pTimeout);
+        break;
+    }
 
     if(ret < 0)
         throw SocketException(WSAGetLastError(), "select operation failed");
 
-	return ret;
+    return ret;
 
 }
 
 string Socket::GetHostIP(const string &host)
 {
     addrinfo hints;
-	memset(&hints, 0, sizeof(addrinfo));
+    memset(&hints, 0, sizeof(addrinfo));
 
-	hints.ai_family = AF_INET;
+    hints.ai_family = AF_INET;
     hints.ai_socktype = SOCK_STREAM;
     hints.ai_protocol = IPPROTO_TCP;
 
-	addrinfo *result;
+    addrinfo *result;
 
-	if(getaddrinfo(host.c_str(), 0, &hints, &result) == 0)
-	{
-		for(addrinfo *ptr = result; ptr != NULL; ptr = ptr->ai_next)
-		{
-			if(ptr->ai_family == AF_INET
-			&& ptr->ai_socktype == SOCK_STREAM
-			&& ptr->ai_protocol == IPPROTO_TCP)
-			{
+    if(getaddrinfo(host.c_str(), 0, &hints, &result) == 0)
+    {
+        for(addrinfo *ptr = result; ptr != NULL; ptr = ptr->ai_next)
+        {
+            if(ptr->ai_family == AF_INET
+            && ptr->ai_socktype == SOCK_STREAM
+            && ptr->ai_protocol == IPPROTO_TCP)
+            {
                 char addressBuffer[INET6_ADDRSTRLEN];
-				
+                
                 return inet_ntop(
                     AF_INET,
                     (sockaddr_in*)ptr->ai_addr,
                     addressBuffer,
                     sizeof(addressBuffer));
-			}
-		}
-	}
+            }
+        }
+    }
 
-	return "";
+    return "";
 }

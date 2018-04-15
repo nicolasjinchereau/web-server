@@ -29,47 +29,47 @@ enum class HttpMethod
 
 enum class HttpStatus
 {
-	NotSet,
-	Continue,
-	SwitchingProtocols,
-	OK,
-	Created,
-	Accepted,
-	NonAuthoritativeInformation,
-	NoContent,
-	ResetContent,
-	PartialContent,
-	MultipleChoices,
-	MovedPermanently,
-	Found,
-	SeeOther,
-	NotModified,
-	UseProxy,
-	TemporaryRedirect,
-	BadRequest,
-	Unauthorized,
-	PaymentRequired,
-	Forbidden,
-	NotFound,
-	MethodNotAllowed,
-	NotAcceptable,
-	ProxyAuthenticationRequired,
-	RequestTimeOut,
-	Conflict,
-	Gone,
-	LengthRequired,
-	PreconditionFailed,
-	RequestEntityTooLarge,
-	RequestURITooLarge,
-	UnsupportedMediaType,
-	RequestedRangeNotSatisfiable,
-	ExpectationFailed,
-	InternalServerError,
-	NotImplemented,
-	BadGateway,
-	ServiceUnavailable,
-	GatewayTimeOut,
-	HTTPVersionNotSupported,
+    NotSet,
+    Continue,
+    SwitchingProtocols,
+    OK,
+    Created,
+    Accepted,
+    NonAuthoritativeInformation,
+    NoContent,
+    ResetContent,
+    PartialContent,
+    MultipleChoices,
+    MovedPermanently,
+    Found,
+    SeeOther,
+    NotModified,
+    UseProxy,
+    TemporaryRedirect,
+    BadRequest,
+    Unauthorized,
+    PaymentRequired,
+    Forbidden,
+    NotFound,
+    MethodNotAllowed,
+    NotAcceptable,
+    ProxyAuthenticationRequired,
+    RequestTimeOut,
+    Conflict,
+    Gone,
+    LengthRequired,
+    PreconditionFailed,
+    RequestEntityTooLarge,
+    RequestURITooLarge,
+    UnsupportedMediaType,
+    RequestedRangeNotSatisfiable,
+    ExpectationFailed,
+    InternalServerError,
+    NotImplemented,
+    BadGateway,
+    ServiceUnavailable,
+    GatewayTimeOut,
+    HTTPVersionNotSupported,
 };
 
 namespace Http
@@ -87,27 +87,27 @@ namespace Http
 class HttpRequest
 {
 public:
-	HttpMethod method = HttpMethod::Get;
-	std::string uri = "/";
-	std::string version = "1.1";
-	std::unordered_map<std::string, std::string> fields;
-	std::vector<char> content;
+    HttpMethod method = HttpMethod::Get;
+    std::string uri = "/";
+    std::string version = "1.1";
+    std::unordered_map<std::string, std::string> fields;
+    std::vector<char> content;
 
     bool Parse(const std::vector<char>& request);
-	bool Parse(const char *pRequest, size_t length);
-	void Serialize(std::vector<char>& buffer);
+    bool Parse(const char *pRequest, size_t length);
+    void Serialize(std::vector<char>& buffer);
 };
 
 class HttpResponse
 {
 public:
     std::string version = "1.1";
-	HttpStatus status = HttpStatus::NotSet;
+    HttpStatus status = HttpStatus::NotSet;
     std::string reason = "Not Set";
-	std::unordered_map<std::string, std::string> fields;
-	std::vector<char> content;
+    std::unordered_map<std::string, std::string> fields;
+    std::vector<char> content;
 
-	bool Parse(const char *pResponse, size_t length);
+    bool Parse(const char *pResponse, size_t length);
     void Serialize(std::vector<char>& buffer);
 
     static HttpResponse Create(HttpStatus status, bool keepAlive = true);

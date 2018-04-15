@@ -14,14 +14,14 @@ int main()
 {
     try
     {
-	    char cwd[MAX_PATH];
-	    GetCurrentDirectoryA(MAX_PATH, cwd);
-	    
+        char cwd[MAX_PATH];
+        GetCurrentDirectoryA(MAX_PATH, cwd);
+        
         auto httpdocs = string(cwd) + "\\httpdocs";
 
         Server server;
-	    server.Start(80, httpdocs);
-	    cin.get();
+        server.Start(80, httpdocs);
+        cin.get();
     }
     catch(exception& ex)
     {

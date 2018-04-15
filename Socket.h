@@ -91,10 +91,10 @@ enum class ProtocolType
 
 enum class SocketPollMode
 {
-	Accept,
-	Read,
-	Write,
-	Error,
+    Accept,
+    Read,
+    Write,
+    Error,
 };
 
 class SocketException : public std::exception
@@ -152,7 +152,7 @@ public:
     ///<summary>Returns the number of bytes sent, or -1 if the socket
     ///is set to non-blocking mode and the operation would have blocked.</summary>
     ///<exception cref="SocketException">Thrown for all errors except EWOULDBLOCK</exception>
-	int Send(const char* buffer, size_t length);
+    int Send(const char* buffer, size_t length);
 
     ///<summary>Returns the number of bytes sent, or -1 if the socket
     ///is set to non-blocking mode and the operation would have blocked.</summary>
