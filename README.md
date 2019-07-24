@@ -1,16 +1,15 @@
-A basic web server created for educational purposes.
+A simple web server built with awaitable sockets using C++20 coroutines.
 
 #### Capabilities:
 
-This server supports basic GET requests with ranges and keep-alive connections - the bare minimum for serving simple web pages and streaming media.
+This server supports basic GET requests with ranges, the bare minimum for serving simple web pages and streaming media.
 
 #### Architecture:
 
-* 1 thread accepts incoming connections
-* 1 thread waits on blocked connections
-* n worker threads process requests
+The previous version of this server used a fixed number of worker threads, and a state-machine to schedule the processing of requests. The resulting implementation was confusing and inefficient.
+https://github.com/nicolasjinchereau/web-server/tree/9cd6d3619e2b39f2f7231c46bedaa2cdcc7c8796
 
-The architecture is similar to an event driven approach, but maintains a state machine for each connection - which will eventually be replaced with a fiber. The worker threads pull from a queue of active connections and update the connection's state for a fixed amount of time. If the update completes without anything blocking, the connection is placed back into the active-queue. Otherwise, it's placed into an idle-queue to be poll'ed. This server is far from optimal, but it works, and performs reasonably. I may do some benchmarking one day when I have time.
+The new version is built on top of awaitable socket operations, which are implemented using C++20 coroutines. The previous state-machine implementation has been refactored into resumable functions, and the resulting implementation is 100 lines shorter, and much easier to read.
 
 #### Build
-* VS2017+ (or any C++17 compiler for Windows)
+* VS2019+ with C++17 language standard and /await command line option

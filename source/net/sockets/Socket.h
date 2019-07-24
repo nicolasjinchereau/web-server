@@ -1,5 +1,5 @@
 /*---------------------------------------------------------------------------------------------
-*  Copyright (c) Nicolas Jinchereau. All rights reserved.
+*  Copyright (c) 2019 Nicolas Jinchereau. All rights reserved.
 *  Licensed under the MIT License. See License.txt in the project root for license information.
 *--------------------------------------------------------------------------------------------*/
 
@@ -9,39 +9,18 @@
 #include <vector>
 #include <exception>
 #include <string>
+#include <vector>
+#include <memory>
+#include <experimental/coroutine>
+#include <system/Dispatcher.h>
+#include <system/Task.h>
+#include <cstdint>
 
 enum class AddressFamily
 {
     Unknown = -1,
-    Unspecified,
-    AppleTalk,
-    Atm,
-    Banyan,
-    Ccitt,
-    Chaos,
-    Cluster,
-    DataKit,
-    DataLink,
-    DecNet,
-    Ecma,
-    FireFox,
-    HyperChannel,
-    Ieee12844,
-    ImpLink,
     InterNetwork,
-    InterNetworkV6,
-    Ipx,
-    Irda,
-    Iso,
-    Lat,
-    NetBios,
-    NetworkDesigners,
-    NS,
-    Osi,
-    Pup,
-    Sna,
-    Unix,
-    VoiceView
+    InterNetworkV6
 };
 
 enum class SocketType
@@ -91,52 +70,49 @@ enum class ProtocolType
 
 enum class SocketPollMode
 {
-    Accept,
     Read,
     Write,
-    Error,
-};
-
-class SocketException : public std::exception
-{
-    int _code;
-public:
-    SocketException() : SocketException(-1){}
-    SocketException(int code) : SocketException(code, "socket error"){}
-    SocketException(int code, const char* message) : _code(code), std::exception(message){}
-    SocketException(int code, const std::string& message) : SocketException(code, message.c_str()){}
-    
-    int code() const {
-        return _code;
-    }
+	Close,
+	Error,
+	Accept = Read,
+	Connect = Write
 };
 
 class Socket
 {
-    uintptr_t _handle;
 public:
     using milliseconds = std::chrono::milliseconds;
     
+#ifdef _WIN32
+    typedef uint64_t HandleType;
+#else
+    typedef int HandleType;
+#endif
+
+	static constexpr int InvalidSocket = ~0;
+	static constexpr int SocketError = -1;
+
     Socket();
     Socket(AddressFamily family, SocketType type, ProtocolType protocol);
-    Socket(uintptr_t handle);
+    Socket(int handle);
     ~Socket();
-
-    Socket(Socket&& socket);
-    Socket& operator=(Socket&& socket);
 
     Socket(const Socket& sock) = delete;
     Socket& operator=(const Socket& sock) = delete;
 
-    uintptr_t handle() const;
-    bool valid() const;
+    Socket(Socket&& socket) noexcept;
+    Socket& operator=(Socket&& socket) noexcept;
 
-    void SetNonBlocking(bool value);
+    int handle() const;
+    bool valid() const;
+    bool blocking() const;
+
+    void SetBlocking(bool value);
     void SetTcpNoDelay(bool value);
     void Bind(int port, const char* address = nullptr, bool reuseAddress = false);
     void Listen();
+	Socket Accept();
     void Connect(int port, const char* address);
-    Socket Accept();
     void Close();
 
     ///<summary>Returns the number of bytes received, or -1 if the socket
@@ -163,5 +139,28 @@ public:
     ///<exception cref="SocketException">The operation failed</exception>
     int Poll(SocketPollMode mode, milliseconds timeout = milliseconds(-1));
 
+    // throws socket_error on failure
+    Task<void> ConnectAsync(int port, const std::string& address);
+    
+    // returns the newly connected socket
+    // throws socket_error on failure
+    Task<Socket> AcceptAsync();
+    
+    // returns the buffer argument for reuse
+    // throws socket_error on failure
+    // buffer must live until call completes
+    Task<int> SendAsync(const char* bufferPtr, size_t bufferSize);
+
+    // returns the buffer argument containing received data
+    // throws socket_error on failure
+    // buffer must live until call completes
+    Task<int> RecvAsync(char* bufferPtr, size_t bufferSize);
+
     static std::string GetHostIP(const std::string& host);
+
+private:
+    void ThrowIfBlocking() const;
+
+    int _handle = -1;
+    bool _blocking = true;
 };

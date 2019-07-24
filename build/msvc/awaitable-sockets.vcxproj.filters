@@ -1,0 +1,124 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="source">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="source\system">
+      <UniqueIdentifier>{fc93eed0-ef5b-4e28-a3f5-3568c42dea84}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\net">
+      <UniqueIdentifier>{25104f8a-1f5c-43ea-b32b-8e6b067c0184}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\net\sockets">
+      <UniqueIdentifier>{fc83bd73-e64c-45e4-b3b3-e4bf86a56b75}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\net\http">
+      <UniqueIdentifier>{7b63d16a-4522-484e-a5e8-d6f711fa6853}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\source\net\http\MimeTypes.h">
+      <Filter>source\net\http</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\net\http\Http.h">
+      <Filter>source\net\http</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\net\http\HttpServer.h">
+      <Filter>source\net\http</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\system\Dispatcher.h">
+      <Filter>source\system</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\system\format.h">
+      <Filter>source\system</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\system\PriorityQueue.h">
+      <Filter>source\system</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\system\Task.h">
+      <Filter>source\system</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\system\Awaiter.h">
+      <Filter>source\system</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\system\DelayAwaiter.h">
+      <Filter>source\system</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\net\sockets\SocketConnectAwaiter.h">
+      <Filter>source\net\sockets</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\net\sockets\SocketController.h">
+      <Filter>source\net\sockets</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\net\sockets\SocketRecvAwaiter.h">
+      <Filter>source\net\sockets</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\net\sockets\SocketSendAwaiter.h">
+      <Filter>source\net\sockets</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\net\sockets\SocketWaiter.h">
+      <Filter>source\net\sockets</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\net\sockets\OSSockets.h">
+      <Filter>source\net\sockets</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\net\sockets\Socket.h">
+      <Filter>source\net\sockets</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\net\sockets\socket_error.h">
+      <Filter>source\net\sockets</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\net\sockets\SocketAcceptAwaiter.h">
+      <Filter>source\net\sockets</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\system\Spinlock.h">
+      <Filter>source\system</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\system\Console.h">
+      <Filter>source\system</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\system\Turnstyle.h">
+      <Filter>source\system</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\source\main.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\net\http\Http.cpp">
+      <Filter>source\net\http</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\net\http\HttpServer.cpp">
+      <Filter>source\net\http</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\system\DelayAwaiter.cpp">
+      <Filter>source\system</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\net\sockets\SocketController.cpp">
+      <Filter>source\net\sockets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\net\sockets\SocketRecvAwaiter.cpp">
+      <Filter>source\net\sockets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\net\sockets\SocketSendAwaiter.cpp">
+      <Filter>source\net\sockets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\net\sockets\SocketWaiter.cpp">
+      <Filter>source\net\sockets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\net\sockets\Socket.cpp">
+      <Filter>source\net\sockets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\net\sockets\SocketAcceptAwaiter.cpp">
+      <Filter>source\net\sockets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\net\sockets\SocketConnectAwaiter.cpp">
+      <Filter>source\net\sockets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\system\Console.cpp">
+      <Filter>source\system</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

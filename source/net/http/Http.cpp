@@ -1,9 +1,10 @@
 /*---------------------------------------------------------------------------------------------
-*  Copyright (c) Nicolas Jinchereau. All rights reserved.
+*  Copyright (c) 2019 Nicolas Jinchereau. All rights reserved.
 *  Licensed under the MIT License. See License.txt in the project root for license information.
 *--------------------------------------------------------------------------------------------*/
 
-#include "Http.h"
+#include <net/http/Http.h>
+
 using namespace std;
 
 struct EnumClassHash
@@ -366,6 +367,56 @@ void HttpRequest::Serialize(vector<char>& buffer)
 
     if(!content.empty())
         buffer.insert(buffer.end(), content.begin(), content.end());
+}
+
+// HTTP RESPONSE
+
+HttpResponse::HttpResponse()
+{
+
+}
+
+HttpResponse::HttpResponse(const HttpResponse& resp)
+{
+    version = resp.version;
+    status = resp.status;
+    reason = resp.reason;
+    fields = resp.fields;
+    content = resp.content;
+}
+
+HttpResponse& HttpResponse::operator=(const HttpResponse& resp)
+{
+    version = resp.version;
+    status = resp.status;
+    reason = resp.reason;
+    fields = resp.fields;
+    content = resp.content;
+    return *this;
+}
+
+HttpResponse::HttpResponse(HttpResponse&& resp) noexcept
+{
+    version = std::move(resp.version);
+    status = resp.status;
+    reason = std::move(resp.reason);
+    fields = std::move(resp.fields);
+    content = std::move(resp.content);
+
+    resp.status = HttpStatus::NotSet;
+}
+
+HttpResponse& HttpResponse::operator=(HttpResponse&& resp) noexcept
+{
+    version = std::move(resp.version);
+    status = resp.status;
+    reason = std::move(resp.reason);
+    fields = std::move(resp.fields);
+    content = std::move(resp.content);
+
+    resp.status = HttpStatus::NotSet;
+
+    return *this;
 }
 
 bool HttpResponse::Parse(const char *pResponse, size_t length)

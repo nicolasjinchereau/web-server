@@ -1,5 +1,5 @@
 /*---------------------------------------------------------------------------------------------
-*  Copyright (c) Nicolas Jinchereau. All rights reserved.
+*  Copyright (c) 2019 Nicolas Jinchereau. All rights reserved.
 *  Licensed under the MIT License. See License.txt in the project root for license information.
 *--------------------------------------------------------------------------------------------*/
 
@@ -130,7 +130,7 @@ inline void write(Lock& lock, const char* fmt, Args&&... args) {
 ///</summary>
 template<typename... Args>
 inline void writeln(const char* fmt, Args&&... args) {
-    format_impl(cout, fmt, std::forward<Args>(args)...);
+    format_impl(std::cout, fmt, std::forward<Args>(args)...);
     std::cout << std::endl;
 }
 
@@ -143,7 +143,7 @@ inline void writeln(const char* fmt, Args&&... args) {
 template<typename Lock, typename... Args>
 inline void writeln(Lock& lock, const char* fmt, Args&&... args) {
     std::lock_guard<Lock> lk(lock);
-    format_impl(cout, fmt, std::forward<Args>(args)...);
+    format_impl(std::cout, fmt, std::forward<Args>(args)...);
     std::cout << std::endl;
     std::cout.flush();
 }

@@ -1,5 +1,5 @@
 /*---------------------------------------------------------------------------------------------
-*  Copyright (c) Nicolas Jinchereau. All rights reserved.
+*  Copyright (c) 2019 Nicolas Jinchereau. All rights reserved.
 *  Licensed under the MIT License. See License.txt in the project root for license information.
 *--------------------------------------------------------------------------------------------*/
 
@@ -13,7 +13,7 @@
 #include <limits>
 #include <unordered_map>
 #include <optional>
-#include "format.h"
+#include <system/format.h>
 
 enum class HttpMethod
 {
@@ -106,6 +106,14 @@ public:
     std::string reason = "Not Set";
     std::unordered_map<std::string, std::string> fields;
     std::vector<char> content;
+
+    HttpResponse();
+
+    HttpResponse(const HttpResponse& resp);
+    HttpResponse& operator=(const HttpResponse& resp);
+
+    HttpResponse(HttpResponse&& resp) noexcept;
+    HttpResponse& operator=(HttpResponse&& resp) noexcept;
 
     bool Parse(const char *pResponse, size_t length);
     void Serialize(std::vector<char>& buffer);
