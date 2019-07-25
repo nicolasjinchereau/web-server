@@ -25,35 +25,35 @@ using DispatchTime = std::chrono::steady_clock::time_point;
 
 enum class DispatchPriority : int
 {
-	Low,
-	Normal,
-	High
+    Low,
+    Normal,
+    High
 };
 
 struct DispatchAction
 {
-	typedef std::chrono::microseconds Duration;
+    typedef std::chrono::microseconds Duration;
 
     void(*fun)(void* ptr, intmax_t num) = nullptr;
     void* ptr = nullptr;
     intmax_t num = 0;
     DispatchPriority pri = DispatchPriority::Normal;
-	DispatchTime tim = DispatchTime(std::chrono::microseconds(0));
+    DispatchTime tim = DispatchTime(std::chrono::microseconds(0));
     void(*fin)(void* ptr, intmax_t num) = nullptr;
 
-	bool operator==(const DispatchAction& right) const { return pri == right.pri; }
-	bool operator!=(const DispatchAction& right) const { return pri != right.pri; }
-	bool operator<(const DispatchAction& right) const { return pri < right.pri; }
-	bool operator<=(const DispatchAction& right) { return pri <= right.pri; }
-	bool operator>(const DispatchAction& right) { return pri > right.pri; }
-	bool operator>=(const DispatchAction& right) { return pri >= right.pri; }
+    bool operator==(const DispatchAction& right) const { return pri == right.pri; }
+    bool operator!=(const DispatchAction& right) const { return pri != right.pri; }
+    bool operator<(const DispatchAction& right) const { return pri < right.pri; }
+    bool operator<=(const DispatchAction& right) { return pri <= right.pri; }
+    bool operator>(const DispatchAction& right) { return pri > right.pri; }
+    bool operator>=(const DispatchAction& right) { return pri >= right.pri; }
 };
 
 class Dispatcher
 {
-	mutable std::mutex mut;
-	mutable std::condition_variable cv;
-	std::atomic<bool> run = false;
+    mutable std::mutex mut;
+    mutable std::condition_variable cv;
+    std::atomic<bool> run = false;
     PriorityQueue<DispatchAction*> requests;
 
     void InvokeAsync(DispatchAction* req)
@@ -91,10 +91,10 @@ class Dispatcher
 
 public:
     
-	static Dispatcher& current() {
+    static Dispatcher& current() {
         static thread_local Dispatcher disp;
-		return disp;
-	}
+        return disp;
+    }
 
     Dispatcher()
     {
@@ -128,49 +128,49 @@ public:
         }
     }
 
-	void Run()
-	{
-		run = true;
+    void Run()
+    {
+        run = true;
 
-		while (run)
-		{
-			auto req = WaitForRequest();
+        while (run)
+        {
+            auto req = WaitForRequest();
 
             if (run && req) {
                 InvokeFunction(req.get());
                 InvokeFinalizer(req.get());
             }
-		}
-	}
+        }
+    }
 
-	void Quit()
-	{
-		std::unique_lock<std::mutex> lk(mut);
-		run = false;
-		Wake();
-	}
+    void Quit()
+    {
+        std::unique_lock<std::mutex> lk(mut);
+        run = false;
+        Wake();
+    }
 
 private:
-	void Wake() {
-		cv.notify_one();
-	}
+    void Wake() {
+        cv.notify_one();
+    }
 
     std::unique_ptr<DispatchAction> WaitForRequest()
-	{
-		std::unique_lock<std::mutex> lk(mut);
-		
-		if (!requests.empty() && requests.top()->tim > DispatchClock::now())
-			cv.wait_until(lk, requests.top()->tim, [this]{ return !run || (!requests.empty() && requests.top()->tim <= DispatchClock::now()); });
-		else
-			cv.wait(lk, [this] { return !run || !requests.empty(); });
-		
+    {
+        std::unique_lock<std::mutex> lk(mut);
+        
+        if (!requests.empty() && requests.top()->tim > DispatchClock::now())
+            cv.wait_until(lk, requests.top()->tim, [this]{ return !run || (!requests.empty() && requests.top()->tim <= DispatchClock::now()); });
+        else
+            cv.wait(lk, [this] { return !run || !requests.empty(); });
+        
         std::unique_ptr<DispatchAction> req;
 
-		if (run && !requests.empty()) {
-			req.reset(requests.top());
-			requests.pop();
-		}
+        if (run && !requests.empty()) {
+            req.reset(requests.top());
+            requests.pop();
+        }
 
-		return req;
-	}
+        return req;
+    }
 };

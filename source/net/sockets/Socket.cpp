@@ -347,34 +347,34 @@ Task<int> Socket::RecvAsync(char* bufferPtr, size_t bufferSize)
 
 string Socket::GetHostIP(const string& host)
 {
-	addrinfo hints;
-	memset(&hints, 0, sizeof(addrinfo));
+    addrinfo hints;
+    memset(&hints, 0, sizeof(addrinfo));
 
-	hints.ai_family = AF_INET;
-	hints.ai_socktype = SOCK_STREAM;
-	hints.ai_protocol = IPPROTO_TCP;
+    hints.ai_family = AF_INET;
+    hints.ai_socktype = SOCK_STREAM;
+    hints.ai_protocol = IPPROTO_TCP;
 
-	addrinfo* result;
+    addrinfo* result;
     string ret;
 
-	if (getaddrinfo(host.c_str(), 0, &hints, &result) == 0)
-	{
-		for (addrinfo* ptr = result; ptr != NULL; ptr = ptr->ai_next)
-		{
-			char buffer[INET6_ADDRSTRLEN];
+    if (getaddrinfo(host.c_str(), 0, &hints, &result) == 0)
+    {
+        for (addrinfo* ptr = result; ptr != NULL; ptr = ptr->ai_next)
+        {
+            char buffer[INET6_ADDRSTRLEN];
             auto addr = (struct sockaddr_in*)ptr->ai_addr;
             
             ret = inet_ntop(
-				AF_INET,
+                AF_INET,
                 &addr->sin_addr,
-				buffer,
-				sizeof(buffer));
-		}
+                buffer,
+                sizeof(buffer));
+        }
 
         freeaddrinfo(result);
-	}
+    }
 
-	return ret;
+    return ret;
 }
 
 void Socket::ThrowIfBlocking() const

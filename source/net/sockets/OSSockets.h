@@ -6,18 +6,18 @@
 #pragma once
 
 #ifndef _WIN32
-	#include <fcntl.h>
-	//#include <errno.h>
-	#include <sys/types.h>
-	#include <sys/socket.h>
-	#include <netinet/in.h>
-	#include <netinet/tcp.h>
-	#include <sys/ioctl.h>
-	#include <arpa/inet.h>
-	#include <unistd.h>
-	#include <sys/socket.h>
-	#include <poll.h>
-	#define SOCKET int
+    #include <fcntl.h>
+    //#include <errno.h>
+    #include <sys/types.h>
+    #include <sys/socket.h>
+    #include <netinet/in.h>
+    #include <netinet/tcp.h>
+    #include <sys/ioctl.h>
+    #include <arpa/inet.h>
+    #include <unistd.h>
+    #include <sys/socket.h>
+    #include <poll.h>
+    #define SOCKET int
     #define S_EWOULDBLOCK             EWOULDBLOCK
     #define S_EINPROGRESS             EINPROGRESS
     #define S_EALREADY                EALREADY
@@ -56,20 +56,20 @@
     #define S_ESTALE                  ESTALE
     #define S_EREMOTE                 EREMOTE
 #else
-	#pragma comment(lib, "ws2_32.lib")
-	#include <WinSock2.h>
-	#include <Ws2tcpip.h>
-	#include <Windows.h>
+    #pragma comment(lib, "ws2_32.lib")
+    #include <WinSock2.h>
+    #include <Ws2tcpip.h>
+    #include <Windows.h>
     #include <stdexcept>
 
-	#if defined(errno)
-		#undef errno
-	#endif
+    #if defined(errno)
+        #undef errno
+    #endif
 
-	#define errno (WSAGetLastError())
-	#define close closesocket
-	#define ioctl ioctlsocket
-	#define poll WSAPoll
+    #define errno (WSAGetLastError())
+    #define close closesocket
+    #define ioctl ioctlsocket
+    #define poll WSAPoll
     #define S_EWOULDBLOCK             WSAEWOULDBLOCK
     #define S_EINPROGRESS             WSAEINPROGRESS
     #define S_EALREADY                WSAEALREADY

@@ -72,10 +72,10 @@ enum class SocketPollMode
 {
     Read,
     Write,
-	Close,
-	Error,
-	Accept = Read,
-	Connect = Write
+    Close,
+    Error,
+    Accept = Read,
+    Connect = Write
 };
 
 class Socket
@@ -89,8 +89,8 @@ public:
     typedef int HandleType;
 #endif
 
-	static constexpr int InvalidSocket = ~0;
-	static constexpr int SocketError = -1;
+    static constexpr int InvalidSocket = ~0;
+    static constexpr int SocketError = -1;
 
     Socket();
     Socket(AddressFamily family, SocketType type, ProtocolType protocol);
@@ -111,7 +111,7 @@ public:
     void SetTcpNoDelay(bool value);
     void Bind(int port, const char* address = nullptr, bool reuseAddress = false);
     void Listen();
-	Socket Accept();
+    Socket Accept();
     void Connect(int port, const char* address);
     void Close();
 

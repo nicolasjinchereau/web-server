@@ -18,7 +18,7 @@ public:
     Task(Task&&) = default;
     Task& operator=(Task&&) = default;
 
-	Task(const std::shared_ptr<Awaiter<T>>& awaiter)
+    Task(const std::shared_ptr<Awaiter<T>>& awaiter)
         : awaiter(awaiter)
     {
     }
@@ -28,17 +28,17 @@ public:
     {
     }
 
-	bool await_ready() {
+    bool await_ready() {
         return awaiter->ready();
-	}
+    }
 
-	void await_suspend(std::experimental::coroutine_handle<> handle) {
+    void await_suspend(std::experimental::coroutine_handle<> handle) {
         awaiter->suspend(handle);
-	}
+    }
 
-	T await_resume() {
+    T await_resume() {
         return awaiter->resume();
-	}
+    }
 
 public:
     static Task<void> Delay(milliseconds length) {
