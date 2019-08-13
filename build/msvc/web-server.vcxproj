@@ -59,9 +59,9 @@
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{681661ED-BC65-4AB1-9DF2-3B8339E5FE5D}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>awaitable-sockets</RootNamespace>
+    <RootNamespace>web-server</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
-    <ProjectName>awaitable-sockets</ProjectName>
+    <ProjectName>web-server</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
