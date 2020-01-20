@@ -1,4 +1,4 @@
-A simple web server built with awaitable sockets using C++20 coroutines.
+A simple web server built with awaitable sockets using C++20 coroutines for Windows and Mac OS
 
 #### Capabilities:
 
