@@ -3,6 +3,23 @@
 *  Licensed under the MIT License. See License.txt in the project root for license information.
 *--------------------------------------------------------------------------------------------*/
 
-#include <system/Console.h>
+#pragma once
+#include <string>
 
-std::mutex Console::mut;
+#ifdef _WIN32
+  #include <direct.h>
+  #define getcwd _getcwd
+#else
+  #include <unistd.h>
+#endif
+
+class FileSystemUtility
+{
+public:
+    static std::string GetCurrentWorkingDir()
+    {
+        char buffer[1024];
+        char* cwd = getcwd(buffer, sizeof(buffer));
+        return cwd ? cwd : std::string();
+    }
+};

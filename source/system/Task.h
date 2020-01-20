@@ -109,12 +109,12 @@ namespace std::experimental
                 return Task<T>(awaiter);
             }
 
-            bool initial_suspend() const {
-                return false;
+            auto initial_suspend() const {
+                return std::experimental::suspend_never{};
             }
 
-            bool final_suspend() const {
-                return true;
+            auto final_suspend() const {
+                return std::experimental::suspend_always{};
             }
 
             template<class U>
@@ -138,6 +138,14 @@ namespace std::experimental
                     if (awaiter->parentHandle) awaiter->parentHandle.resume();
                 }, this);
             }
+            
+#ifndef _WIN32
+            // required with Clang despite defining set_exception
+            void unhandled_exception() {
+                Console::WriteLine("Task: unhandled_exception");
+                std::exit(1);
+            }
+#endif
         };
     };
 
@@ -156,12 +164,12 @@ namespace std::experimental
                 return Task<void>(awaiter);
             }
 
-            bool initial_suspend() const {
-                return false;
+            auto initial_suspend() const {
+                return std::experimental::suspend_never{};
             }
 
-            bool final_suspend() const {
-                return true;
+            auto final_suspend() const {
+                return std::experimental::suspend_always{};
             }
 
             void return_void() {
@@ -181,6 +189,14 @@ namespace std::experimental
                     if (awaiter->parentHandle) awaiter->parentHandle.resume();
                 }, this);
             }
+            
+#ifndef _WIN32
+            // required with Clang despite defining set_exception
+            void unhandled_exception() {
+                Console::WriteLine("Task: unhandled_exception");
+                std::exit(1);
+            }
+#endif
         };
     };
 }

@@ -30,7 +30,7 @@ public:
         return _error;
     }
 
-    virtual char const* what() const override {
+    char const* what() const noexcept {
         return _message.c_str();
     }
 };

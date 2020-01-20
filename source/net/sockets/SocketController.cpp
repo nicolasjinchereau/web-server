@@ -154,7 +154,7 @@ void SocketController::ContinueConnect(void* operation, intmax_t result)
     if (result == -1)
     {
         int error;
-        int sz = sizeof(error);
+        socklen_t sz = sizeof(error);
         int ret = getsockopt((Socket::HandleType)op->socket, SOL_SOCKET, SO_ERROR, (char*)&error, &sz);
         op->error = error;
     }

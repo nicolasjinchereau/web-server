@@ -115,7 +115,7 @@ void SocketWaiter::WaitForEvents()
 
     // poll for socket events
     int millis = -1;
-    int ret = poll(pollfds.data(), (ULONG)pollfds.size(), millis);
+    int ret = poll(pollfds.data(), (nfds_t)pollfds.size(), millis);
     if (ret == Socket::SocketError)
         Console::WriteLine("failed to poll sockets: %", (int)errno);
 }

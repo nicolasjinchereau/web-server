@@ -67,34 +67,36 @@ public:
     }
 
     friend struct TurnstyleAwaiter;
+    
+    inline bool await_ready()
+    {
+        // always return false to avoid monopolizing the dispatcher
+        return false;
+    }
+
+    inline void await_suspend(std::experimental::coroutine_handle<> handle)
+    {
+        std::lock_guard<Spinlock> lk(lock);
+
+        if (tokens == 0)
+        {
+            lineup.push_back(Turnstyle::Guest{ &Dispatcher::current(), handle });
+        }
+        else
+        {
+            --tokens;
+
+            Dispatcher::current().InvokeAsync(
+                [](auto p, auto n) { std::experimental::coroutine_handle<>::from_address(p).resume(); },
+                handle.address()
+            );
+        }
+    }
+
+    inline void await_resume()
+    {
+        
+    }
+
 };
 
-inline bool await_ready(Turnstyle& ts)
-{
-    // always return false to avoid monopolizing the dispatcher
-    return false;
-}
-
-inline void await_suspend(Turnstyle& ts, std::experimental::coroutine_handle<> handle)
-{
-    std::lock_guard<Spinlock> lk(ts.lock);
-
-    if (ts.tokens == 0)
-    {
-        ts.lineup.push_back(Turnstyle::Guest{ &Dispatcher::current(), handle });
-    }
-    else
-    {
-        --ts.tokens;
-
-        Dispatcher::current().InvokeAsync(
-            [](auto p, auto n) { std::experimental::coroutine_handle<>::from_address(p).resume(); },
-            handle.address()
-        );
-    }
-}
-
-inline void await_resume(Turnstyle& ts)
-{
-    
-}

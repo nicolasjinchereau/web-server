@@ -92,6 +92,9 @@ public:
     static constexpr int InvalidSocket = ~0;
     static constexpr int SocketError = -1;
 
+    static void InitializeSystem();
+    static void ShutdownSystem();
+    
     Socket();
     Socket(AddressFamily family, SocketType type, ProtocolType protocol);
     Socket(int handle);

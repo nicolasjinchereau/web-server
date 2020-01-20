@@ -9,9 +9,6 @@
 #include <system/format.h>
 #include <system/Spinlock.h>
 #include <system/Console.h>
-#include <WinSock2.h>
-#include <Ws2tcpip.h>
-#include <Windows.h>
 #include <iostream>
 #include <chrono>
 #include <fstream>
@@ -25,26 +22,13 @@ using namespace chrono;
 
 HttpServer::HttpServer()
 {
-#ifdef _WIN32
-    WSAData wsdata;
-    if(WSAStartup(WINSOCK_VERSION, &wsdata) != 0) {
-        throw runtime_error("failed to initialze winsock");
-    }
-
-    if(wsdata.wVersion != WINSOCK_VERSION) {
-        WSACleanup();
-        throw runtime_error("failed to initialze winsock");
-    }
-#endif
+    Socket::InitializeSystem();
 }
 
 HttpServer::~HttpServer()
 {
     Stop();
-
-#ifdef _WIN32
-    WSACleanup();
-#endif
+    Socket::ShutdownSystem();
 }
 
 void HttpServer::Start(int port, const string& docsPath, size_t threadCount)
@@ -53,7 +37,7 @@ void HttpServer::Start(int port, const string& docsPath, size_t threadCount)
 
     try
     {
-        Console::WriteLine("Server starting");
+        Console::WriteLine("Starting server with document path: %", docsPath.c_str());
 
         this->port = port;
         this->httpdocs = docsPath;
@@ -102,11 +86,19 @@ void HttpServer::Stop()
 
 Task<void> HttpServer::ListenForConnections()
 {
-    listenSocket = Socket(AddressFamily::InterNetwork, SocketType::Stream, ProtocolType::TCP);
-    listenSocket.SetBlocking(false);
-    listenSocket.Bind(port);
-    listenSocket.Listen();
-
+    try
+    {
+        listenSocket = Socket(AddressFamily::InterNetwork, SocketType::Stream, ProtocolType::TCP);
+        listenSocket.SetBlocking(false);
+        listenSocket.Bind(port);
+        listenSocket.Listen();
+    }
+    catch(std::exception& ex)
+    {
+        Console::WriteLine("Server failed to listen: %", ex.what());
+        co_return;
+    }
+    
     while (run)
     {
         try
@@ -116,7 +108,7 @@ Task<void> HttpServer::ListenForConnections()
             socket.SetBlocking(false);
             socket.SetTcpNoDelay(true);
 
-            Console::WriteLine(socket, "client connected");
+            Console::WriteLine((uint64_t)socket.handle(), "client connected");
 
             // add client socket to queue, to be picked up by a worker thread
             EnqueueClient(std::move(socket));
@@ -194,12 +186,12 @@ Task<void> HttpServer::AcceptRequests(Socket socket)
         {
             requestBuffer.resize(BufferSize);
             
-            Console::WriteLine(socket, "waiting for request");
+            Console::WriteLine((uint64_t)socket.handle(), "waiting for request");
             
             int received = co_await socket.RecvAsync(requestBuffer.data(), requestBuffer.size());
             if (received == 0)
             {
-                Console::WriteLine(socket, "client disconnected");
+                Console::WriteLine((uint64_t)socket.handle(), "client disconnected");
                 break;
             }
 
@@ -208,13 +200,13 @@ Task<void> HttpServer::AcceptRequests(Socket socket)
             HttpRequest req;
 
             if (!req.Parse(requestBuffer)) {
-                Console::WriteLine(socket, "bad request");
+                Console::WriteLine((uint64_t)socket.handle(), "bad request");
                 co_await SendError(socket, HttpStatus::BadRequest, keepAlive);
                 continue;
             }
 
             if (req.method != HttpMethod::Get) {
-                Console::WriteLine(socket, "method not allowed");
+                Console::WriteLine((uint64_t)socket.handle(), "method not allowed");
                 co_await SendError(socket, HttpStatus::MethodNotAllowed, keepAlive);
                 continue;
             }
@@ -222,7 +214,7 @@ Task<void> HttpServer::AcceptRequests(Socket socket)
             auto connection = req.fields.find("Connection");
             if (connection != req.fields.end() && connection->second == "close")
             {
-                Console::WriteLine(socket, "Connection: close");
+                Console::WriteLine((uint64_t)socket.handle(), "Connection: close");
                 keepAlive = false;
             }
 
@@ -238,11 +230,11 @@ Task<void> HttpServer::AcceptRequests(Socket socket)
             }
 #endif
 
-            Console::WriteLine(socket, "requested file - %", req.uri);
+            Console::WriteLine((uint64_t)socket.handle(), "requested file - %", req.uri);
 
             ifstream fin(localPath, ios::in | ios::binary);
             if (!fin.is_open()) {
-                Console::WriteLine(socket, "file not found - %", req.uri);
+                Console::WriteLine((uint64_t)socket.handle(), "file not found - %", req.uri);
                 co_await SendError(socket, HttpStatus::NotFound, keepAlive);
                 continue;
             }
@@ -287,20 +279,20 @@ Task<void> HttpServer::AcceptRequests(Socket socket)
             }
             else // hasRanges == -1
             {
-                Console::WriteLine(socket, "range not satisfiable");
+                Console::WriteLine((uint64_t)socket.handle(), "range not satisfiable");
                 co_await SendError(socket, HttpStatus::RequestedRangeNotSatisfiable, keepAlive);
                 continue;
             }
 
             co_await SendFile(socket, std::move(resp), std::move(fin), contentLength);
 
-            Console::WriteLine(socket, "successfully sent file - %", req.uri);
+            Console::WriteLine((uint64_t)socket.handle(), "successfully sent file - %", req.uri);
         }
 
-        Console::WriteLine(socket, "exited request loop");
+        Console::WriteLine((uint64_t)socket.handle(), "exited request loop");
     }
     catch (exception& ex) {
-        Console::WriteLine(socket, ex.what());
+        Console::WriteLine((uint64_t)socket.handle(), ex.what());
     }
 }
 
@@ -308,7 +300,7 @@ Task<void> HttpServer::SendError(Socket& socket, HttpStatus status, bool keepAli
 {
     try
     {
-        Console::WriteLine(socket, "Send Error");
+        Console::WriteLine((uint64_t)socket.handle(), "Send Error");
         std::vector<char> buffer;
         auto resp = HttpResponse::Create(status, keepAlive);
         resp.Serialize(buffer);
@@ -334,7 +326,7 @@ Task<void> HttpServer::SendFile(Socket& socket, HttpResponse response, std::ifst
     std::vector<char> buffer;
     response.Serialize(buffer);
     
-    Console::WriteLine(socket, "sending response..");
+    Console::WriteLine((uint64_t)socket.handle(), "sending response..");
 
     // send response header
     {
@@ -357,8 +349,8 @@ Task<void> HttpServer::SendFile(Socket& socket, HttpResponse response, std::ifst
         contentLength -= readCount;
         
         if(!fin.read(buffer.data(), readCount)) {
-            Console::WriteLine(socket, "failed to read from file");
-            return;
+            Console::WriteLine((uint64_t)socket.handle(), "failed to read from file");
+            co_return;
         }
 
         const char* bufferPtr = buffer.data();

@@ -75,36 +75,36 @@ int GetNativeProtocolType(ProtocolType pt)
     else throw std::runtime_error("invalid ProtocolType");
 }
 
-#if defined(_WIN32)
-void InitWinsock()
+void Socket::InitializeSystem()
 {
+#ifdef _WIN32
     WSAData wsdata;
-    if (WSAStartup(WINSOCK_VERSION, &wsdata) != 0)
+    if (WSAStartup(WINSOCK_VERSION, &wsdata) != 0) {
         throw std::runtime_error("failed to initialze winsock");
-
-    if (wsdata.wVersion != WINSOCK_VERSION)
-    {
+    }
+    
+    if (wsdata.wVersion != WINSOCK_VERSION) {
         WSACleanup();
         throw std::runtime_error("failed to initialze winsock");
     }
+#endif
 }
 
-void TermWinsock() {
+void Socket::ShutdownSystem()
+{
+#ifdef _WIN32
     WSACleanup();
-}
-#else
-void InitWinsock(){}
-void TermWinsock(){}
 #endif
+}
 
 Socket::Socket()
 {
-    InitWinsock();
+    InitializeSystem();
 }
 
 Socket::Socket(AddressFamily family, SocketType type, ProtocolType protocol)
 {
-    InitWinsock();
+    InitializeSystem();
 
     auto af = GetNativeAddressFamily(family);
     auto ty = GetNativeSocketType(type);
@@ -116,7 +116,7 @@ Socket::Socket(AddressFamily family, SocketType type, ProtocolType protocol)
 }
 
 Socket::Socket(int handle) {
-    InitWinsock();
+    InitializeSystem();
     _handle = handle;
     SetBlocking(true);
 }
@@ -126,11 +126,11 @@ Socket::~Socket()
     if(_handle != InvalidSocket)
         close(_handle);
 
-    TermWinsock();
+    ShutdownSystem();
 }
 
 Socket::Socket(Socket&& socket) noexcept {
-    InitWinsock();
+    InitializeSystem();
     _handle = socket._handle;
     _blocking = socket._blocking;
     socket._handle = InvalidSocket;
@@ -363,7 +363,7 @@ string Socket::GetHostIP(const string& host)
         {
             char buffer[INET6_ADDRSTRLEN];
             auto addr = (struct sockaddr_in*)ptr->ai_addr;
-            
+
             ret = inet_ntop(
                 AF_INET,
                 &addr->sin_addr,

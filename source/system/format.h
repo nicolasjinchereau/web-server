@@ -63,7 +63,7 @@ namespace
         fmt = ph + 1;
 
         if(*fmt != 0)
-            format(stream, fmt, std::forward<Args>(args)...);
+            format_impl(stream, fmt, std::forward<Args>(args)...);
     }
 }
 

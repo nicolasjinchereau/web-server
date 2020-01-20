@@ -13,3 +13,4 @@ The new version is built on top of awaitable socket operations, which are implem
 
 #### Build
 * VS2019+ with C++17 language standard and /await command line option
+* XCode 11.3.1+ with C++17 language dialect and -fcoroutines-ts C++ flag

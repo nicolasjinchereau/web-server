@@ -1,0 +1,408 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		37163B0823D3F6560029F755 /* SocketAcceptAwaiter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37163AE423D3F6550029F755 /* SocketAcceptAwaiter.cpp */; };
+		37163B0923D3F6560029F755 /* SocketController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37163AE523D3F6550029F755 /* SocketController.cpp */; };
+		37163B0A23D3F6560029F755 /* Socket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37163AE623D3F6550029F755 /* Socket.cpp */; };
+		37163B0B23D3F6560029F755 /* SocketSendAwaiter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37163AE723D3F6550029F755 /* SocketSendAwaiter.cpp */; };
+		37163B0C23D3F6560029F755 /* SocketConnectAwaiter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37163AE923D3F6550029F755 /* SocketConnectAwaiter.cpp */; };
+		37163B0D23D3F6560029F755 /* SocketRecvAwaiter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37163AED23D3F6550029F755 /* SocketRecvAwaiter.cpp */; };
+		37163B0E23D3F6560029F755 /* SocketWaiter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37163AF023D3F6550029F755 /* SocketWaiter.cpp */; };
+		37163B0F23D3F6560029F755 /* HttpServer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37163AF723D3F6550029F755 /* HttpServer.cpp */; };
+		37163B1023D3F6560029F755 /* Http.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37163AFA23D3F6550029F755 /* Http.cpp */; };
+		37163B1123D3F6560029F755 /* Console.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37163B0023D3F6550029F755 /* Console.cpp */; };
+		37163B1223D3F6560029F755 /* DelayAwaiter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37163B0523D3F6550029F755 /* DelayAwaiter.cpp */; };
+		37801E5223D52981001C94E1 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37801E5123D52981001C94E1 /* main.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		37163AC923D3EB750029F755 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		37163ACB23D3EB750029F755 /* web-server */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "web-server"; sourceTree = BUILT_PRODUCTS_DIR; };
+		37163AE423D3F6550029F755 /* SocketAcceptAwaiter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SocketAcceptAwaiter.cpp; sourceTree = "<group>"; };
+		37163AE523D3F6550029F755 /* SocketController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SocketController.cpp; sourceTree = "<group>"; };
+		37163AE623D3F6550029F755 /* Socket.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Socket.cpp; sourceTree = "<group>"; };
+		37163AE723D3F6550029F755 /* SocketSendAwaiter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SocketSendAwaiter.cpp; sourceTree = "<group>"; };
+		37163AE823D3F6550029F755 /* SocketWaiter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocketWaiter.h; sourceTree = "<group>"; };
+		37163AE923D3F6550029F755 /* SocketConnectAwaiter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SocketConnectAwaiter.cpp; sourceTree = "<group>"; };
+		37163AEA23D3F6550029F755 /* SocketSendAwaiter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocketSendAwaiter.h; sourceTree = "<group>"; };
+		37163AEB23D3F6550029F755 /* OSSockets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSSockets.h; sourceTree = "<group>"; };
+		37163AEC23D3F6550029F755 /* SocketRecvAwaiter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocketRecvAwaiter.h; sourceTree = "<group>"; };
+		37163AED23D3F6550029F755 /* SocketRecvAwaiter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SocketRecvAwaiter.cpp; sourceTree = "<group>"; };
+		37163AEE23D3F6550029F755 /* SocketAcceptAwaiter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocketAcceptAwaiter.h; sourceTree = "<group>"; };
+		37163AEF23D3F6550029F755 /* socket_error.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = socket_error.h; sourceTree = "<group>"; };
+		37163AF023D3F6550029F755 /* SocketWaiter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SocketWaiter.cpp; sourceTree = "<group>"; };
+		37163AF123D3F6550029F755 /* SocketController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocketController.h; sourceTree = "<group>"; };
+		37163AF223D3F6550029F755 /* SocketConnectAwaiter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocketConnectAwaiter.h; sourceTree = "<group>"; };
+		37163AF323D3F6550029F755 /* Socket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Socket.h; sourceTree = "<group>"; };
+		37163AF523D3F6550029F755 /* MimeTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MimeTypes.h; sourceTree = "<group>"; };
+		37163AF623D3F6550029F755 /* Http.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Http.h; sourceTree = "<group>"; };
+		37163AF723D3F6550029F755 /* HttpServer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HttpServer.cpp; sourceTree = "<group>"; };
+		37163AF823D3F6550029F755 /* HttpServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpServer.h; sourceTree = "<group>"; };
+		37163AF923D3F6550029F755 /* Session.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Session.h; sourceTree = "<group>"; };
+		37163AFA23D3F6550029F755 /* Http.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Http.cpp; sourceTree = "<group>"; };
+		37163AFC23D3F6550029F755 /* Console.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Console.h; sourceTree = "<group>"; };
+		37163AFD23D3F6550029F755 /* Spinlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Spinlock.h; sourceTree = "<group>"; };
+		37163AFE23D3F6550029F755 /* Task.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Task.h; sourceTree = "<group>"; };
+		37163AFF23D3F6550029F755 /* DelayAwaiter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DelayAwaiter.h; sourceTree = "<group>"; };
+		37163B0023D3F6550029F755 /* Console.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Console.cpp; sourceTree = "<group>"; };
+		37163B0123D3F6550029F755 /* Turnstyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Turnstyle.h; sourceTree = "<group>"; };
+		37163B0223D3F6550029F755 /* Dispatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Dispatcher.h; sourceTree = "<group>"; };
+		37163B0323D3F6550029F755 /* PriorityQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PriorityQueue.h; sourceTree = "<group>"; };
+		37163B0423D3F6550029F755 /* Awaiter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Awaiter.h; sourceTree = "<group>"; };
+		37163B0523D3F6550029F755 /* DelayAwaiter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DelayAwaiter.cpp; sourceTree = "<group>"; };
+		37163B0623D3F6550029F755 /* format.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; path = format.h; sourceTree = "<group>"; };
+		37801E5123D52981001C94E1 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = ../../source/main.cpp; sourceTree = "<group>"; };
+		37EF25DC23D5166400705F7A /* FileSystemUtility.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FileSystemUtility.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		37163AC823D3EB750029F755 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		37163AC223D3EB750029F755 = {
+			isa = PBXGroup;
+			children = (
+				37801E5123D52981001C94E1 /* main.cpp */,
+				37163AE223D3F6550029F755 /* net */,
+				37163AFB23D3F6550029F755 /* system */,
+				37163ACC23D3EB750029F755 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		37163ACC23D3EB750029F755 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				37163ACB23D3EB750029F755 /* web-server */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		37163AE223D3F6550029F755 /* net */ = {
+			isa = PBXGroup;
+			children = (
+				37163AE323D3F6550029F755 /* sockets */,
+				37163AF423D3F6550029F755 /* http */,
+			);
+			name = net;
+			path = ../../source/net;
+			sourceTree = "<group>";
+		};
+		37163AE323D3F6550029F755 /* sockets */ = {
+			isa = PBXGroup;
+			children = (
+				37163AEF23D3F6550029F755 /* socket_error.h */,
+				37163AEB23D3F6550029F755 /* OSSockets.h */,
+				37163AEE23D3F6550029F755 /* SocketAcceptAwaiter.h */,
+				37163AE423D3F6550029F755 /* SocketAcceptAwaiter.cpp */,
+				37163AF123D3F6550029F755 /* SocketController.h */,
+				37163AE523D3F6550029F755 /* SocketController.cpp */,
+				37163AF223D3F6550029F755 /* SocketConnectAwaiter.h */,
+				37163AE923D3F6550029F755 /* SocketConnectAwaiter.cpp */,
+				37163AEA23D3F6550029F755 /* SocketSendAwaiter.h */,
+				37163AE723D3F6550029F755 /* SocketSendAwaiter.cpp */,
+				37163AEC23D3F6550029F755 /* SocketRecvAwaiter.h */,
+				37163AED23D3F6550029F755 /* SocketRecvAwaiter.cpp */,
+				37163AE823D3F6550029F755 /* SocketWaiter.h */,
+				37163AF023D3F6550029F755 /* SocketWaiter.cpp */,
+				37163AF323D3F6550029F755 /* Socket.h */,
+				37163AE623D3F6550029F755 /* Socket.cpp */,
+			);
+			path = sockets;
+			sourceTree = "<group>";
+		};
+		37163AF423D3F6550029F755 /* http */ = {
+			isa = PBXGroup;
+			children = (
+				37163AF523D3F6550029F755 /* MimeTypes.h */,
+				37163AF923D3F6550029F755 /* Session.h */,
+				37163AF623D3F6550029F755 /* Http.h */,
+				37163AFA23D3F6550029F755 /* Http.cpp */,
+				37163AF823D3F6550029F755 /* HttpServer.h */,
+				37163AF723D3F6550029F755 /* HttpServer.cpp */,
+			);
+			path = http;
+			sourceTree = "<group>";
+		};
+		37163AFB23D3F6550029F755 /* system */ = {
+			isa = PBXGroup;
+			children = (
+				37EF25DC23D5166400705F7A /* FileSystemUtility.h */,
+				37163B0423D3F6550029F755 /* Awaiter.h */,
+				37163AFC23D3F6550029F755 /* Console.h */,
+				37163B0023D3F6550029F755 /* Console.cpp */,
+				37163AFF23D3F6550029F755 /* DelayAwaiter.h */,
+				37163B0223D3F6550029F755 /* Dispatcher.h */,
+				37163B0523D3F6550029F755 /* DelayAwaiter.cpp */,
+				37163B0623D3F6550029F755 /* format.h */,
+				37163AFE23D3F6550029F755 /* Task.h */,
+				37163B0123D3F6550029F755 /* Turnstyle.h */,
+				37163B0323D3F6550029F755 /* PriorityQueue.h */,
+				37163AFD23D3F6550029F755 /* Spinlock.h */,
+			);
+			name = system;
+			path = ../../source/system;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		37163ACA23D3EB750029F755 /* web-server */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 37163AD223D3EB750029F755 /* Build configuration list for PBXNativeTarget "web-server" */;
+			buildPhases = (
+				37163AC723D3EB750029F755 /* Sources */,
+				37163AC823D3EB750029F755 /* Frameworks */,
+				37163AC923D3EB750029F755 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "web-server";
+			productName = COTest;
+			productReference = 37163ACB23D3EB750029F755 /* web-server */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		37163AC323D3EB750029F755 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1130;
+				ORGANIZATIONNAME = "Nicolas Jinchereau";
+				TargetAttributes = {
+					37163ACA23D3EB750029F755 = {
+						CreatedOnToolsVersion = 11.3.1;
+					};
+				};
+			};
+			buildConfigurationList = 37163AC623D3EB750029F755 /* Build configuration list for PBXProject "web-server" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 37163AC223D3EB750029F755;
+			productRefGroup = 37163ACC23D3EB750029F755 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				37163ACA23D3EB750029F755 /* web-server */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		37163AC723D3EB750029F755 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				37163B1023D3F6560029F755 /* Http.cpp in Sources */,
+				37163B0923D3F6560029F755 /* SocketController.cpp in Sources */,
+				37801E5223D52981001C94E1 /* main.cpp in Sources */,
+				37163B0A23D3F6560029F755 /* Socket.cpp in Sources */,
+				37163B0B23D3F6560029F755 /* SocketSendAwaiter.cpp in Sources */,
+				37163B0E23D3F6560029F755 /* SocketWaiter.cpp in Sources */,
+				37163B0823D3F6560029F755 /* SocketAcceptAwaiter.cpp in Sources */,
+				37163B0D23D3F6560029F755 /* SocketRecvAwaiter.cpp in Sources */,
+				37163B1223D3F6560029F755 /* DelayAwaiter.cpp in Sources */,
+				37163B1123D3F6560029F755 /* Console.cpp in Sources */,
+				37163B0F23D3F6560029F755 /* HttpServer.cpp in Sources */,
+				37163B0C23D3F6560029F755 /* SocketConnectAwaiter.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		37163AD023D3EB750029F755 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CPLUSPLUSFLAGS = (
+					"$(OTHER_CFLAGS)",
+					"-fcoroutines-ts",
+				);
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		37163AD123D3EB750029F755 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				OTHER_CPLUSPLUSFLAGS = (
+					"$(OTHER_CFLAGS)",
+					"-fcoroutines-ts",
+				);
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		37163AD323D3EB750029F755 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = AZW2YDM86R;
+				ENABLE_HARDENED_RUNTIME = YES;
+				HEADER_SEARCH_PATHS = ../../source;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		37163AD423D3EB750029F755 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = AZW2YDM86R;
+				ENABLE_HARDENED_RUNTIME = YES;
+				HEADER_SEARCH_PATHS = ../../source;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		37163AC623D3EB750029F755 /* Build configuration list for PBXProject "web-server" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				37163AD023D3EB750029F755 /* Debug */,
+				37163AD123D3EB750029F755 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		37163AD223D3EB750029F755 /* Build configuration list for PBXNativeTarget "web-server" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				37163AD323D3EB750029F755 /* Debug */,
+				37163AD423D3EB750029F755 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 37163AC323D3EB750029F755 /* Project object */;
+}

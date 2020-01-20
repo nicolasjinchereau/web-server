@@ -12,6 +12,7 @@
     #include <sys/socket.h>
     #include <netinet/in.h>
     #include <netinet/tcp.h>
+    #include <netdb.h>
     #include <sys/ioctl.h>
     #include <arpa/inet.h>
     #include <unistd.h>
@@ -107,4 +108,7 @@
     #define S_EDQUOT                  WSAEDQUOT
     #define S_ESTALE                  WSAESTALE
     #define S_EREMOTE                 WSAEREMOTE
+
+    typedef ULONG nfds_t;
+    typedef int socklen_t;
 #endif

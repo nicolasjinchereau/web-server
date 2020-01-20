@@ -9,18 +9,16 @@
 #include <iomanip>
 #include <system/format.h>
 
-class Socket;
-
 class Console
 {
     static std::mutex mut;
 public:
 
     template<typename... Args>
-    static void WriteLine(Socket& socket, const char* fmt, Args&& ... args)
+    static void WriteLine(uint64_t tag, const char* fmt, Args&& ... args)
     {
         std::stringstream ss;
-        ss << std::setfill(' ') << std::setw(6) << (uint64_t)socket.handle() << ": " << fmt;
+        ss << std::setfill(' ') << std::setw(6) << tag << ": " << fmt;
         writeln(mut, ss.str().c_str(), std::forward<Args>(args)...);
     }
 
